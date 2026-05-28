@@ -2,9 +2,9 @@ version: "3"
 
 services:
   nginx:
-    image: nginx:latest
+    image: nginx:1.31.1
     ports:
-      - "80:80"
+      - 8000:80
     volumes:
       - ./server/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
 
@@ -23,12 +23,14 @@ services:
       - ./server/app.js:/app/app.js
 
   prometheus:
-    image: prom/prometheus
+    image: prom/prometheus:v3
+    ports:
+      - 9090:9090
     volumes:
       - ./server/prometheus.yml:/etc/prometheus/prometheus.yml
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:13.0.1-security-01
     ports:
       - 3000:3000
     environment:
