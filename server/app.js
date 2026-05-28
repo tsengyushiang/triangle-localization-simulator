@@ -24,6 +24,8 @@ const requestHandler = async (request, response) => {
       });
     });
 
+    const metricsContentType = client.register.contentType;
+    response.writeHead(200, { "Content-Type": metricsContentType });
     return response.end(await client.register.metrics());
   }
 
